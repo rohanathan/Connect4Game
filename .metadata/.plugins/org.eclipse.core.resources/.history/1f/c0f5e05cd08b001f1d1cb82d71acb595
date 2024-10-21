@@ -1,0 +1,51 @@
+package com.game.connect4;
+
+import java.util.Scanner;
+
+public class Connect4 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter name of Player 1: ");
+        String name1 = scanner.nextLine();
+        //Converting to Upper case
+        name1 = name1.toUpperCase();
+        System.out.print("Enter symbol of Player 1 (X or O): ");
+        char symbol1 = scanner.next().charAt(0);
+        //Converting to Upper case
+        symbol1 = Character.toUppeCase(symbol1);
+        
+        System.out.print("Enter name of Player 2: ");
+        scanner.nextLine(); // Consume newline
+        String name2 = scanner.nextLine();
+        System.out.print("Enter symbol of Player 2 (X or O): ");
+        char symbol2 = scanner.next().charAt(0);
+
+        Grid grid = new Grid();
+        Player player1 = new Player(name1, symbol1, grid);
+        Player player2 = new Player(name2, symbol2, grid);
+
+        Player currentPlayer = player1;
+        boolean gameWon = false;
+
+        while (!grid.isFull() && !gameWon) {
+            System.out.println(grid);
+            currentPlayer.takeTurn();
+
+            Disc lastDisc = new Disc(currentPlayer.getSymbol());  // Assuming Disc is created here to match grid
+            gameWon = grid.checkWin(lastDisc);
+
+            if (!gameWon) {
+                currentPlayer = (currentPlayer == player1) ? player2 : player1;  // Switch player
+            }
+        }
+
+        // Game end messages
+        System.out.println(grid);
+        if (gameWon) {
+            System.out.println(currentPlayer.getName() + " wins!");
+        } else {
+            System.out.println("It's a tie!");
+        }
+    }
+}

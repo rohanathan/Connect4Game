@@ -1,0 +1,45 @@
+package com.game.connect4;
+
+import java.util.Scanner;
+
+public class Connect4 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Grid grid = new Grid();
+
+        // Enter Player 1 details
+        System.out.print("Enter name of Player 1: ");
+        String name1 = scanner.nextLine();
+        System.out.print("Enter symbol of Player 1 (X or O): ");
+        char symbol1 = scanner.next().toUpperCase().charAt(0);
+        char symbol2 = (symbol1 == 'X') ? 'O' : 'X';
+        System.out.print("Enter name of Player 2: ");
+        scanner.nextLine(); // Consume the newline
+        String name2 = scanner.nextLine();
+
+        Player player1 = new Player(name1, symbol1, grid);
+        Player player2 = new Player(name2, symbol2, grid);
+
+        Player currentPlayer = player1;
+        boolean gameWon = false;
+
+        while (!grid.isFull() && !gameWon) {
+            System.out.println(grid);
+            currentPlayer.takeTurn(scanner); // Pass the scanner to the takeTurn method
+
+            // Check if the last disc dropped resulted in a win
+            if (grid.isWinner(currentPlayer.getSymbol())) {
+                gameWon = true;
+                System.out.println(currentPlayer.getName() + " wins!");
+            } else {
+                currentPlayer = (currentPlayer == player1) ? player2 : player1; // Switch player
+            }
+        }
+
+        if (!gameWon) {
+            System.out.println("It's a tie!");
+        }
+
+        scanner.close();
+    }
+}

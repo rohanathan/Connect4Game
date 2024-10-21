@@ -1,0 +1,95 @@
+package com.game.connect4;
+
+public class Grid {
+    private char[][] grid;
+
+    // Constructor initializes a 6x7 grid
+    public Grid() {
+        grid = new char[6][7];
+        // Initialize the grid with empty spaces
+        System.out.println("  0  1  2  3  4  5  6");
+		System.out.println("------------------------");
+        for (int row = 0; row < 6; row++) {
+        	//System.out.print("|");
+            for (int col = 0; col < 7; col++) {
+                grid[row][col] = ' ';
+                //System.out.print("|");
+            }
+        }
+    }
+
+    // Method to drop a disc in a specified column
+    public boolean dropDisc(Disc disc, int column) {
+        for (int row = grid.length - 1; row >= 0; row--) {
+            if (grid[row][column] == ' ') {
+                grid[row][column] = disc.getSymbol();
+                disc.setPosition(row, column);
+                return true;
+            }
+        }
+        return false;  // Column is full
+    }
+
+    // Check if the column is valid and not full
+    public boolean isColumnValid(int column) {
+        return column >= 0 && column < 7 && grid[0][column] == ' ';
+    }
+
+    // Check if the grid is full
+    public boolean isFull() {
+        for (int col = 0; col < 7; col++) {
+            if (grid[0][col] == ' ') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Check for a win condition
+    public boolean checkWin(Disc disc) {
+        char symbol = disc.getSymbol();
+        int row = disc.getRow();
+        int col = disc.getCol();
+
+        return checkDirection(row, col, 1, 0, symbol) ||  // Horizontal
+               checkDirection(row, col, 0, 1, symbol) ||  // Vertical
+               checkDirection(row, col, 1, 1, symbol) ||  // Diagonal up-right
+               checkDirection(row, col, 1, -1, symbol);   // Diagonal down-right
+    }
+
+    // Helper method to check for 4 consecutive discs in a given direction
+    private boolean checkDirection(int row, int col, int dRow, int dCol, char symbol) {
+        int count = 0;
+        for (int i = -3; i <= 3; i++) {
+            int newRow = row + i * dRow;
+            int newCol = col + i * dCol;
+
+            if (newRow >= 0 && newRow < 6 && newCol >= 0 && newCol < 7 && grid[newRow][newCol] == symbol) {
+                count++;
+                if (count == 4) {
+                    return true;
+                }
+            } else {
+                count = 0;
+            }
+        }
+        return false;
+    }
+
+    // Method to convert the grid to a string for display
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int row = 0; row < 6; row++) {
+            sb.append("|");
+            for (int col = 0; col < 7; col++) {
+                sb.append(String.format("%2c", grid[row][col]));
+                sb.append("|");
+            }
+            sb.append("\n");
+        }
+        sb.append("------------------------\n");
+        sb.append("  0  1  2  3  4  5  6\n");
+        return sb.toString();
+    }
+}
