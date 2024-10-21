@@ -18,7 +18,7 @@ Let's walk through the game flow and the roles of the classes involved:
     - Initializes a 6x7 grid with empty spaces.
     - Provides a method to drop a disc into a valid column.
     - Checks for a valid column, win conditions, and whether the grid is full.
-    - **Change**: Added `isColumnValid()` to verify valid columns before dropping discs.
+    - `isColumnValid()` to verify valid columns before dropping discs.
 - **Game Mechanics**: The grid checks four possible winning conditions: horizontal, vertical, and two diagonal alignments of four same-symbol discs.
 
 ### 3. **Disc Class**
