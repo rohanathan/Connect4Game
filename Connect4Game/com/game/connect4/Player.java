@@ -25,6 +25,7 @@ public class Player {
 				column = scanner.nextInt();
 				if (grid.isColumnValid(column)) {
 					validPlay = true;
+					System.out.println("\nValid move");
 				} else {
 					System.out.println("\nInvalid move, enter a valid number 0-6");
 				}

@@ -72,19 +72,16 @@ public class Connect4 {
 			if (grid.isWinner(currentPlayer.getSymbol())) {
 				gameWon = true;
 				System.out.println(grid);
-				System.out.println("\nMove: Valid");
 				System.out.println("\nGame: Completed");
 				System.out.println("\n"+currentPlayer.getName() + " wins!");
 			} else {
 
 				currentPlayer = (currentPlayer == player1) ? player2 : player1; // Switch player
-				System.out.println("\nMove: Valid");
 				System.out.println("\nGame: In Progress");
 			}
 		}
 
 		if (!gameWon) {
-			System.out.println("\nMove: Valid");
 			System.out.println("\nGame: Completed");
 			System.out.println("\nIt's a tie!");
 		}
@@ -103,5 +100,5 @@ If the player chooses to undo,the last move is reverted.
 This makes it clear that the same player should act again after an undo.
 
 - The flag `hasPromptedUndo` is reset to `false` after the player's turn is finalized, 
-allowing the next player to be prompted for an undo, if needed, on their own turn.
+allowing the next player to be prompted for an undo on their own turn.
 */
