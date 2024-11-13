@@ -9,6 +9,7 @@ Let's walk through the game flow and the roles of the classes involved:
     - Alternates turns between two players until the game is won or the grid is full.
     - Checks if a player has won using `grid.isWinner()`.
     - Declares the winner or a tie.
+    - Undo Functionality (Enhancement): After each move, players have the option to undo their last move, the prompt to undo appears only once per turn. If they opt to undo, the same player gets to take the turn again.
 
 
 ### 2. **Grid Class**

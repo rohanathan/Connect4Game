@@ -26,10 +26,10 @@ public class Player {
 				if (grid.isColumnValid(column)) {
 					validPlay = true;
 				} else {
-					System.out.println("Invalid move, please try again.");
+					System.out.println("\nInvalid move, enter a valid number 0-6");
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("Please enter a valid number.");
+				System.out.println("\nInvalid move, only numbers are allowed.");
 				scanner.next(); // Clear the invalid input
 			}
 		}
